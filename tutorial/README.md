@@ -1,22 +1,26 @@
-# Important Notice before Reading!!!
+## Important Notice before Reading!!!
 
-**【[How to use? / Usage Guide](https://lev.zone/tutorial/#/)】**
+Please ensure you are reading the proper documentation (User Guide vs. Developer Guide).
 
-1、 **Target object**：**everyone (including developers)**
+### User Guide
+** [How to use? / Usage Guide](https://lev.zone/tutorial/#/)】**
 
-2、 **Document use**：After the configuration of the environment according to this document, users can use all the tools on LEVIATHAN online without any deployment and installation of a single tool, which greatly improves the work efficiency of security personnel.
+1、 **Target Audience**：**Everyone (including developers)**
+
+2、 **Document use**： This tutorial sets up environment configuration. After the configuration of the environment according to this document, users can use all the tools on LEVIATHAN online without needing to deploy or install a single tool, greatly improving the work efficiency of security personnel.
 
 3、 **Instructions for use**：
-- For users of LEV, all the tools will be used at will only after completing the configuration of the environment according to the " Usage Guide ";
-- For developers, the configuration of the "Usage Guide" is the pre-step of developing tools. After that, you need to develop following the "Development Documentation". 
+- For users of LEV, all tools can be used only after completing the configuration of the environment according to the " Usage Guide ";
+- For developers, the configuration of the "Usage Guide" is a prerequisite for developing tools. After confiuguration, you can develop following the "Development Documentation". 
 
+### Developer Guide
 **【[How to develop? / Development Documentation](https://lev.zone/docs/#/)】**
 
-1、 **Target object**：**only for developers on LEVIATHAN**
+1、 **Target Audience**：**Developers using LEVIATHAN**
 
-2、 **Document use**：It shows the best practices of the development process on LEV, covering ① how to develop single-mode/multi-mode tools ② how to develop and call the automatic workflows of the tools to improve development efficiency.
+2、 **Document use**：This tutuorial shows the best practices of the development process on LEV. It covers: ① how to develop single-mode/multi-mode tools ② how to develop and call the automatic workflows of the tools to improve development efficiency.
 
-3、 **Instructions for use**：For developers on LEV, the configuration must be made at first according to the "Usage Guide", and then it’s greatly recommended that the tool development be made according to the "Development Documentation".
+3、 **Instructions for use**：For developers on LEV, after setting up their enviornment via the "Usage Guide", the "Development Documentation" explains how they can begin developing tools using LEV.
 
 
 
