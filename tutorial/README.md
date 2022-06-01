@@ -26,15 +26,15 @@ Please ensure you are reading the proper documentation (User Guide vs. Developer
 
 # Leviathan Usage Guide
 
-Welcome to Leviathan, where you can easily perform security testing by deploying tools and workflows published by our community members. You are also encouraged to become a developer and contribute tools and workflows to our community.
+Welcome to Leviathan, where you can easily perform security testing using tools and workflows published by the community. We encouraged you to also become a developer and contribute tools and workflows to our community.
 
-This document will demonstrate how to use tools and workflows on Leviathan. If you are interested in uploading tools or workflows, please move to the [development document](https://lev.zone/docs/).
+This document will demonstrate Leviathan setup and how to use tools and workflows. If you are interested in uploading tools or workflows, please move to the [development document](https://lev.zone/docs/).
 
-Different from the traditional online security tool integration platform, Leviathan ensures that task initiation and deployment are done on two seperate ends. **①The invocation and running of tools；②the production and storage of data, all rely on the user's private local environment. These information do not go through the Leviathan cloud server, thus ensuring the data and privacy security of our community members**. 
+In contrast to traditional online security tool integration platforms, Leviathan ensures task initiation and deployment are done on two seperate ends. **① The invocation and running of tools and ② the production and storage of data, all rely on the user's private local environment. This information does not go to the Leviathan cloud server, thus ensuring the privacy and data security of our users**. 
 
-In addition, users can enable the tools and detection tasks with one click without the download/deployment/update of the tools or any code!
+In addition, users can enable tools and detection tasks with one click without the download/deployment/update of the tools or any code!
 
-Next, let's take a look at how to use Leviathan!
+Next, let's see how to use Leviathan!
 
 
 
@@ -48,7 +48,7 @@ The detailed setup steps depend on your operating system. This manual is divided
 - Credential uploading and acquisition
 - Environment initiation
 
-
+Before you begin, make sure to create an account with Leviathan at: https://www.lev.zone/portal/user/sign_up 
 
 ## 1. Local environment configuration
 
@@ -56,21 +56,21 @@ The detailed setup steps depend on your operating system. This manual is divided
 
 #### 	1.1  Preliminary Environment Installation (Install Docker)
 
-Pre-knowledge: [what is docker](https://www.redhat.com/en/topics/containers/what-is-docker)
+Background: [what is docker](https://www.redhat.com/en/topics/containers/what-is-docker)
 
- If Docker is installed on your device, please check its version number. Leviathan supports 20.10.10 and above. If this condition is met, you can skip this step, otherwise, please install or update Docker as follows.
+ If Docker is installed on your device, please check its version number. Leviathan supports 20.10.10 and above. If this condition is met, you can skip this step. Otherwise, please install or update Docker as follows.
  
- Docker installation on Windows is complicated. First, you need to enable the built-in 'Hyper-V' function on Windows (therefore, it is recommended to use Linux system or WSL instead of Windows). The following tutorial takes Win10 as an example, and explains differences when using differnet Win10 system Edition (If you don't know your system Edition, feel free to google it).
+ Docker installation on Windows is complicated. First, you need to enable the built-in 'Hyper-V' function on Windows (therefore, it is recommended to use Linux system or WSL instead of Windows). The following tutorial takes Windows 10 as an example, and explains differences when using different Win10 Editions (If you don't know your system's Edition, feel free to google it).
 
 ##### 1.1.1 Enable CPU virtualization support
 
- Enter the BIOS settings in system and check whether the BIOS has enabled CPU virtualization support as below.
+ Enter the BIOS settings from startup and check whether BIOS has enabled CPU virtualization support as below.
 
  ![Enable virtualization support.jpg](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/2e12d9cd-cf65-4c6c-88a2-1b6d42110f22.JPEG)
 
 ##### 1.1.2 Win10 Home Edition Pre-step
 
-It is strongly recommended to upgrade to Win10 Professional version or use Linux, Mac. If you use Win10 Professional Edition, Enterprise Edition or Education Edition, please skip this step and enter 1.1.3.
+It is strongly recommended to upgrade to Win10 Professional version or use Linux or Mac. If you use Win10 Professional Edition, Enterprise Edition or Education Edition, please skip this step and proceed to 1.1.3.
 
 First, you need to enable the Hyper-V module. The Windows Home Edition cannot query the 'hyper-v' function module. It needs to be enabled in a special way, as follows:
 
@@ -92,25 +92,26 @@ Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /AL
 
 ![install hyper-v.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/575279f5-e410-4348-963b-349bdeb858a6.JPEG)
 
- After the installation is completed, enter Y and restart. (Note: **If the system is updated after the installation has been completed, it may cause the installation to be invalid, you need to check, and if necessary, you need to reinstall Hyper-V**)
+ After the installation is completed, enter Yes and restart. (Note: **If the system is updated after the installation has been completed, it may invalidate the installation. You need to check, and if necessary, reinstall Hyper-V**)
 
  Repeat the above steps, save the following code as change.cmd and run as administrator.
 
  `REG ADD "HKEY_LOCAL_MACHINE\software\Microsoft\Windows NT\CurrentVersion" /v EditionId /T REG_EXPAND_SZ /d Professional /F`
 
- Now, the Win10 Home Ediiton Hyper-V should be enabled.
+ Now, the Win10 Home Edition Hyper-V should be enabled.
 
 ##### 1.1.3 Win10 Professional Edition, Enterprise Edition, Education Edition
 
  If you use Win10 Professional Edition, Education Edition, or Enterprise Edition, it won't be as complicated as the Home Edition. Go to Control Panel -> Programs -> Enable or Disable Windows functions -> Check hyper-v, and then follow the prompts to restart the system.
 
+##### 1.1.4 Install Docker
  The following steps should and must be performed on all Windows systems.
 
  Enable the display of file extensions. For details, refer to [File Extension Display](https://fileinfo.com/help/windows_10_show_file_extensions)
 
 [Download the docker installation file](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
 
- Click the file to install docker (the Home Edition requires that Windows Container WSL2 should be unchecked during the installation; This step is not needed in other Win Editions).
+ Click the file to install docker (the Home Edition requires that Windows Container WSL2 should be unchecked during the installation; This step is not needed in other Windows Editions).
 
  Wait for the installation to restart successfully. After it, open Docker by clicking the Desktop icon. Docker has a graphical interface under **Windows**.
 
@@ -133,15 +134,15 @@ Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /AL
 
 ​	Then enter the command:	``` cd ~```
 
-​	2.	Enter the current user's home directory with the command above, and then enter the ``` ls .ssh```command to check whether the ssh key exists, namely the two files  "id_ed25519" 、"id_ed25519.pub" :
+​	2.	Enter the current user's home directory with the command above, and then enter ``` ls .ssh``` to check whether an ssh key exists, namely the two files  "id_ed25519" 、"id_ed25519.pub" :
 
 ![Check ssh key.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/fc1959af-8a2a-45ee-af59-22cf8b83953a.JPEG)
 
-As shown in the picture above, the prompt in red(path cannot be found) means that the file does not exist and needs to be created (**if it exists, skip the generation step directly** ). Enter the following command and execute it in a new line:
+As shown in the picture above, the prompt in red (path cannot be found) means that the file does not exist and needs to be created (**if it exists, skip the generation step entirely** ). Enter the following command and execute it in a new line:
 
 ​		```ssh-keygen.exe -t ed25519```
 
-You will be prompted to input, please ignore it, just press the Enter key all the way to the end, until the following prompt appears(Notes: It is not recommended to use the default RSA encryption method to generate keys, and RSA keys are disabled by default in higher versions of openssh):
+You will be prompted to input, please ignore it, just press the Enter key all the way to the end, until the following prompt appears (Notes: It is not recommended to use the default RSA encryption method to generate keys, and RSA keys are disabled by default in higher versions of openssh):
 
 ```vbscript
 +---[RSA 2048]----+
@@ -157,17 +158,19 @@ You will be prompted to input, please ignore it, just press the Enter key all th
 +----[SHA256]-----+
 ```
 
-​	After that, enter  `ls .ssh` again. The two files mentioned above will be displayed:
+​	After that, enter  `ls .ssh` again. The two files mentioned above will be displayed (please disregard the names in the picture below):
 
 ![ssh key.jpg](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/d0e95ec6-b907-4f19-80fc-4d43256b2b72.JPEG)
 
-3. Enter the command`cat ~/.ssh/id_ed25519.pub` to view the contents of the file, and copy it. (If you cannot be copied directly by right-clicking in PowerShell, please google alternative copy methods.) 
 
-   If you really can't copy, you can also open the id_ed25519.pub file through the file browser(the file path is `C Disk\User\(Current User’s Name)\.ssh\)`, then copy it.
+
+3. Enter the command `cat ~/.ssh/id_ed25519.pub` to view the contents of the file, and copy it. (If you cannot copy directly by right-clicking in PowerShell, please google alternative copy methods.) 
+
+   If you really can't copy, you can also open the id_ed25519.pub file through the file browser (the file path is `C Disk\User\(Current User’s Name)\.ssh\)`, and copy it from there.
   
 4. Log in to Leviathan, in `Account settings` - `Public key management`, choose to upload the ssh public key, enter the name, and add the content of the file copied in the steps above to the public key. 
 
-5. Under the path of the third step, the file path is `C Disk\User\(Current User’s Name)\.ssh\`, create `New text document.txt`. Open the file and enter the following content(change the username), then save it:
+5. Under the file path `C Disk\User\(Current User’s Name)\.ssh\`, create `New text document.txt`. Open the file and enter the following content(change the username), then save it:
 
    ```yaml
    Host lev
@@ -196,11 +199,11 @@ You will be prompted to input, please ignore it, just press the Enter key all th
    ```ssh username@service.lev.zone -p 2222```（the username is your Leviathan username，not email!）
 
    The following statement appears:
-   ```Are you sure you want to continue connecting (yes/no/[fingerprint])? ``` enter yes immediately and press Enter. Please do not wait too long, otherwise the startup may fail.
+   ```Are you sure you want to continue connecting (yes/no/[fingerprint])? ``` enter yes immediately and press Enter. Please do not wait too long, otherwise the startup may timeout.
 
-7. First, add a device on the **[Account Settings-My Device]** page of Leviathan, enter a name, and click Submit.
+7. Next, add a device on the **[Account Settings-My Device]** page of Leviathan. Enter a name, and click Submit.
 
-8. Next, execute the following command to launch the local environment:
+8. Then, execute the following command to launch the local environment:
 
    ```bash
    $ ssh lev agent | docker run -v /var/run/docker.sock:/docker --rm -i talentsec/lev
@@ -209,9 +212,9 @@ You will be prompted to input, please ignore it, just press the Enter key all th
    # Successful
    ```
 
-   After the command is executed, the image container will be automatically pulled and launched, and the whole process may last for a few minutes. When the containers are all launched, everything is ready!
+   After the command is executed, the image container will be automatically pulled and launched. The whole process may take a few minutes. When the containers are launched, everything is ready!
 
-   If the download speed of the container is too slow due to network, it can be accelerated by changing the Docker image source:
+   If the download speed of the container is too slow due to network issues, it can be accelerated by changing the Docker image source:
 
    ```Bash
    Open Docker, click Settings
@@ -228,7 +231,7 @@ You will be prompted to input, please ignore it, just press the Enter key all th
      ]
    ```
 
-   The location for the paste is as shown in the picture below (Tips for beginners:`"buildkit": true` A half width comma needs to be added after the curly braces in the following line, and the code should be pasted in front of the curly braces in the bottom line, otherwise an error will occur).
+   The location for the paste is as shown in the picture below (Tip for beginners: `"buildkit": true` A half width comma needs to be added after the curly braces in the following line, and the code should be pasted in front of the curly braces in the bottom line, otherwise an error will occur).
 
    ![image.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/575d3a79-7772-4318-a566-7293f809a4c5.png)
    
@@ -243,14 +246,14 @@ You will be prompted to input, please ignore it, just press the Enter key all th
    # Successful
    ```
 
-   Finally, in [Account Settings - My Device], you can see that the device is online! 
+   Finally, in [Account Settings -> My Device], you can see that the device is online! 
    
 
 ### Linux
 
 #### 1.  Install docker
 
-​		Ubuntu:	[reference documentation](https://docs.docker.com/engine/install/ubuntu/)
+​		Ubuntu:	[reference documentation](thtps://docs.docker.com/engine/install/ubuntu/)
 
 ​		CentOS:	[reference documentation](https://docs.docker.com/engine/install/centos/)
 
@@ -258,13 +261,15 @@ You will be prompted to input, please ignore it, just press the Enter key all th
 
 #### 2. Generate ssh key
 
-Enter the command: `ls -la ~/.ssh` to detect whether there is a ssh key in the system. If not, follow the tutorial to generate a key pair:	
+Enter the command: `ls -la ~/.ssh` to detect whether there is a ssh key in the system. If not, follow the below commands to generate a key pair:	
 
 ```
 $ ssh-keygen -t ecdsa -C "youremail@example.com"
 # Replace the email with Leviathan's registered email
 # When an Input option appears, click Enter
-# It is not recommended to use the rsa encryption algorithm to generate a key pair because ecdsa is more secure, and the rsa key is disabled by default in the higher version of openssh
+# It is not recommended to use the rsa encryption algorithm to
+# generate a key pair because ecdsa is more secure, and the rsa key
+# is disabled by default in the higher version of openssh
 ```
 
 #### 3. Upload
@@ -295,6 +300,7 @@ If the following message is returned, there is a problem with the configuration 
 
 ```Bash
 $ ssh lev
+# The following statement appears: Are you sure you want to continue connecting (yes/no/[fingerprint])? enter yes immediately and press Enter. Please do not wait too long, otherwise the startup may fail.
 Permission denied (publickey). # If this message displays, the ssh public key is incorrectly configured. Please check whether the ssh public key and username are correct.
 ```
 
@@ -311,13 +317,12 @@ First, add a device on the [Account Settings - My Device] page, enter a name, an
 Next, execute the following command to launch the local environment (if the pull speed is slow, it is recommended to modify the image source of docker to that of the University of Science and Technology of China):
 
 ```bash
-$ ssh lev agent | docker run -v /var/run/docker.sock:/docker --rm -i talentsec/lev
-# The following statement appears: Are you sure you want to continue connecting (yes/no/[fingerprint])? enter yes immediately and press Enter. Please do not wait too long, otherwise the startup may fail.
+$ ssh lev agent | sudo docker run -v /var/run/docker.sock:/docker --rm -i talentsec/lev
 INFO:root:Agent is ready
 # Successful
 ```
 
-After the command is executed, the image container will be automatically pulled and launched, and the whole process may last for a few minutes. When the containers are all launched, everything is ready!
+After the command is executed, the image container will be automatically pulled and launched. The whole process may take a few minutes. When the containers are launched, everything is ready!
 
 Finally, in [Account Settings - My Device], you can see that the device is online!  
 ![image.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/f947afbe-93f3-4764-a97f-df67cbc4b14a.JPEG)
@@ -339,7 +344,7 @@ When the Docker Logo on the lower left corner is green, it means you have succes
 
 #### Generate ssh public key
 
-Open the folder (Finder) under Mac, press the combination of `shift`+`command`+`G`, the following pop-up Windows will appear, enter `~/.ssh` . Enter the .ssh directory, and check whether there are "id_ed25519"、"id_ed25519.pub" files.
+Open the folder (Finder) under Mac, press the combination of `shift`+`command`+`G`, the following pop-up Windows will appear, enter `~/.ssh` . Enter the .ssh directory, and check whether the files `id_ed25519` and `id_ed25519.pub` exist.
 
 ![go_to_folder.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/01912358-ec54-41a7-9aa8-527a525ecbc0.JPEG)
 
@@ -355,7 +360,7 @@ $ ssh-keygen -t ed25519 -C "youremail@example.com"
 
 #### Upload ssh public key
 
-Log in to Leviathan, in `Account settings` - `Public key management`, choose to upload the ssh public key, enter the name at will, and copy the content of the id_ed25519.pub or id_ed25519.pub public key file generated in the steps above to the public key.
+Log in to Leviathan, in `Account settings` - `Public key management`, choose to upload the ssh public key, enter a name for the key, and copy the content of the id_ed25519.pub public key file generated in the steps above to the public key field.
 
 ```sh
 # Mac: View .pub file，copy and upload to Leviathan(recommended)
@@ -364,8 +369,7 @@ $ cat ~/.ssh/id_ed25519.pub
 
 #### Configure ssh config file
 
-First, you need to find the file directory where the ssh public key is stored:
-Run the command:`touch ~/.ssh/config` to create a config file and enter the following(change the username to your own):
+First, you need to find the file directory where the ssh public key is stored. Once you find this directory (often, `~/.ssh/config`), run the command:`touch ~/.ssh/config` to create a config file and enter the following (changing the username to your own):
 
 ```bash
 Host lev
@@ -381,7 +385,7 @@ $ ssh lev
 Connection to service.lev.zone closed. # Successful
 ```
 
-If the following message is returned, there is a problem with the configuration file, please check the previous configuration steps:
+If the following message is returned, there is a problem with the configuration file and you should verify the previous configuration steps:
 
 ```Bash
 $ ssh lev
@@ -392,22 +396,22 @@ If the process above shows an error, you can also directly enter the following c
 ```ssh username@service.lev.zone -p 2222```（the username is your Leviathan username，not email!）
 
 The following statement appears:
-```Are you sure you want to continue connecting (yes/no/[fingerprint])? ``` enter yes and press Enter immediately, do not wait too long, otherwise the startup may fail.
+```Are you sure you want to continue connecting (yes/no/[fingerprint])? ``` enter yes and press Enter immediately, (do not wait too long, as the setup may timeout).
 
 #### Launch
 
 First, add a device on the [Account Settings - My Device] page, enter a name, and click Submit.
 
-Next, execute the following command to launch the local environment(If the pull speed is slow, it is recommended to modify the image source of docker to that of the University of Science and Technology of China，feel free to google it): 
+Next, execute the following command to launch the local environment (If the pull speed is slow, we recommended modifying the image source of docker to that of the University of Science and Technology of China; feel free to google this for more information): 
 
 ```bash
 $ ssh lev agent | docker run -v /var/run/docker.sock:/docker --rm -i talentsec/lev
-# The following statement appears: Are you sure you want to continue connecting (yes/no/[fingerprint])? enter yes and press Enter immediately, do not wait too long, otherwise the startup may fail.
+# The following statement appears: Are you sure you want to continue connecting (yes/no/[fingerprint])? enter yes and press Enter immediately, (do not wait too long, as the setup may timeout).
 INFO:root:Agent is ready
 # Successful
 ```
 
-After the command is executed, the image container will be automatically pulled and launched, and the whole process may last for a few minutes. When the containers are all launched, everything is ready! 
+After the command is executed, the image container will be automatically pulled and launched. The whole process may last a few minutes. When the containers are all launched, everything is ready! 
 
 
 
@@ -426,13 +430,13 @@ Log in to Leviathan, you can then see a total of 6 items in the directory bar.
 
 ### 2.1 Choose a tutorial
 
-If this is your first time to Leviathan, you may not know where to start, or what tools should be experienced firstly, you can go to the Forum. According to the official penetration tutorial 1-4, you can easily complete a web penetration test on Leviathan! 
+If this is your first time to Leviathan, you may not know where to start, or what tools should be experienced firstly, you can go to the Forum. Using the official penetration testing tutorials 1-4, you can easily complete a web penetration test on Leviathan! 
 
 ![image_1.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/a6b43e3e-9a12-42e4-bb35-51f8cc8df13e.JPEG)
 
 ### 2.2 Select tools
 
-If you have a specific tool to use, you can find the relevant tools or workflows in the Market, and run the task directly.
+If you have a specific tool to use, you can find the relevant tools or workflows in the Market and directly run the task.
 
 ![image_2.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/f6fac1d4-508d-4254-9b4d-9b11b271afd0.png)
 
@@ -444,25 +448,25 @@ The tool page is divided into the following four modules:
 
 ![image_4.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/27ced2ad-f6e9-4f02-8a69-5c502e543133.JPEG)
 
-- Basic Information:
-  It briefly describes the function, version, and usage of the tool. For example, to run the tool in Quick Mode, you only need to enter the url parameter, which is a string.
+- Introduction/Basic Information:
+  This briefly describes the function, version, and usage of the tool. For example, it shows that, to run the tool in Quick Mode, you only need to enter the url parameter, which is a string.
 
-- Source Code File:
-  Here you can directly view the invocation source code of the tool for learning and research purposes.
+- Source:
+  Here you can view the invocation source code of the tool to learn more about it.
 
-- Communication Panel:
-  This is the part where you can share your tips and thoughts on using the tool.
+- Comment:
+  Here you can share your tips or thoughts on using the tool.
 
-- Running Log:
-  You can view the invocation log of the tool.
+- History:
+  Here you can view the invocation log of the tool.
 
 ---
 
-You can create a task after you find the tool you want to run!
+You can create a task after you find the tool you want to run! There are two methods to create a new Task:
 
 #### 2.2.1 Method 1: Create a new task on the tool page
 
-Click directly `New Task` on the upper right of the tool page to quickly enter the invocation interface of the tool.
+Click `New Task` on the upper right of the tool page to enter the invocation interface of the tool.
 
 ![header_nmap.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/16eb4d67-9c99-41ee-9bca-0f1e4b6e0d8f.JPEG)
 
@@ -476,75 +480,79 @@ On the upper right of the tool page, select Collect, add tool to `Collection`. A
 
 Let's take a look at what information is needed to complete the creation of the task!
 
-When creating a task, the first step is to choose the method of invocation:
+When creating a task, the first step (after naming your task of course!) is to choose the mode (i.e. what function of the tool you want to use).
 
-- Quick Mode: No code knowledge is required, and the detection can be enabled with one click by directly entering parameters on the web page.
-- Customized Mode: 100% of the tool capabilities can be exerted, with a high degree of freedom, which is convenient for debugging and advanced users.
+Next you need to select the method of invocation:
+
+- Quick Mode: No code knowledge is required, and the tool can be enabled with one click by directly entering parameters on the web page.
+- Customized Mode: 100% of the tool capabilities can be exerted, with a high degree of freedom, which is convenient for debugging and advanced users (but may be more complicated for beginning users or simple use cases).
 
 #### 2.3.1 Quick Mode 
 
-We take Nmap as an example.
+We will look at Nmap as an example.
 
-First, choose the Nmap typical invocation, make the method of invocation remain default(that is, Quick Mode), then fill in the parameters required by the task and submit it.
+First, choose the `Nmap typical invocation` mode, keep the default method of invocation (Quick Mode). Then fill in the parameters required by the task and submit it.
 
-In this mode, one detection demands only some basic taget information.
+In this mode, a detection only requires some basic target information.
 
 ![image_7.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/0bd2ea8b-9514-4b55-a7e6-5127ce9d3c45.JPEG)
 
-You can see that the task is being executed, and you can view the results after the task has been done.
+You can see that the task is being executed, and you can view the results after the task is complete.
 
 ![image_8.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/0c5e9676-834b-4ced-a74c-acdd6599372a.JPEG)
 
 #### 2.3.2 Customized Mode 
 
-Now we have learned the Quick Mode Invocation, but the actual situation of penetration testing changes rapidly. How can we realize the full performance of the tool?
+We have learned about Quick Mode Invocation. However, actual penetration testing situations changes rapidly and often require added customization fo tools. How can we realize the full performance of the tool?
 
-In this chapter，we will learn how to conduct a customized invocation of tools.
+In this section，we will learn how to conduct a customized invocation of a tool.
 
 Here we use Nmap to perform a customized scan on an IP.
 
-At first, enter the `New task` page.
+First, enter the `New task` page for Nmap.
 
-On this page, choose Raw Mode, and make the method of invocation remain default(that is, Customized Mode).
+Choose Raw Mode, and keep the default method of invocation (Customized Mode).
 
 ![image_9.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/be280f8d-1a0c-4bf5-bf02-fe4ee5a725c9.JPEG)
 
-The use of the tool command and of the command line is exactly the same, the only difference is that the argv parameter is a list. The only thing we have to do is to upload the input command in the form of a list into the argv parameter.
+The use of the customized invocation command is exactly the same as running the tool directly on the command line. The only difference is that the argv parameter is a list. The only thing we have to do is upload the input command as a list into the argv parameter.
 
-If you want to learn about the parameters and commands of one specific tool, you can move to the official detail document of this tool.
+If you want to learn about the parameters and commands of one specific tool, you can visit the official details document of that tool.
 
-For example, we want to scan an IP here, so our command line request is:
+For example, we want to scan an IP with NMap, so our command line arguments are:
 
 ```Bash
 nmap -T4 -A -v -Pn IP    
 ```
 
-As element interval, spaces can be converted to a list as shown below:
+We then convert each flag/input to an element of the argv list, as shown below:
 
 ![image_10.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/bdb7143f-2a95-4735-b867-89763e615798.JPEG)
 
-Then submit it.
+We then submit it.
 
 ### 2.4 View Results
 
-After the execution of the task, click `Result` to view the running result of the task, then a simple tool invocation has been completed.
+After the execution of the task, click `Result` to view the running result of the task. 
 
 ![image_11.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/2eb75d26-4fd7-4073-b538-f161fdc7a3be.JPEG)
 
+This completes a simple tool invocation.
+
 ### 2.5 Debug
 
-Unexpected errors may occur during the task execution, most of which are caused by input parameters, such as the target being inaccessible, or simply the wrong URL. So how do we debug it?
+Unexpected errors may occur during the task execution. Most are caused by input parameters (such as the target being inaccessible, or simply the wrong URL). So how do you debug it?
 
 ![debug](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/efc3a8d5-6d97-4b3a-b2b7-803e94136411.JPEG)
 
-Here you can see that the task is running. First, you can view the task log by clicking the Log button to view the running status of the task.
+In the picture above, you can see the task is running. First, you can view the task log by clicking the `Log` button. This shows the running status of the task.
 
 If the log cannot be used to directly identify or solve the problem, select the Debug button.
 
 ![debug_en](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/4dd15574-2cfd-403d-92d9-2c661f26a24b.JPEG)
 
-The platform will give a debug command. We copy it into the command line of the environment for execution, and we can enter the debug command line inside the container.
+Leviathan will then give you a debug command. We copy it into the command line of the environment for execution, and we can enter the debug command line inside the container.
 
-Ipdb is a python code command-line debugging tool that integrates ipython. For specific use, you can move to the Documentation of ipdb.
+Within the container, debugging can be performed with Ipdb. Ipdb is a python code command-line debugging tool that integrates with ipython. For specific use cases, you can move to the Documentation of ipdb.
 
 ![image_15.png](https://levimg.s3.cn-northwest-1.amazonaws.com.cn/x/4d65446f-dfc3-4e73-860b-c3eeb323dcfc.png)
